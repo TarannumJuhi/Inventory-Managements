@@ -1,0 +1,68 @@
+{% extends 'inventory/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Record Sale</h1>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" class="img-fluid mb-3 rounded" alt="{{ product.name }}">
+                    {% endif %}
+                    <p class="card-text">
+                        <strong>Price:</strong> &#8377 {{ product.price }}<br>
+                        <strong>Available Stock:</strong> {{ product.stock_quantity }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Sale Details</h5>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="quantity" class="form-label">Quantity</label>
+                            <input type="number" class="form-control" id="quantity" name="quantity" min="1" max="{{ product.stock_quantity }}" required>
+                            <div class="form-text">Maximum available: {{ product.stock_quantity }}</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Total Price</label>
+                            <div class="input-group">
+                                <span class="input-group-text">&#8377</span>
+                                <input type="text" class="form-control" id="total_price" readonly>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-check me-2"></i>Complete Sale
+                            </button>
+                            <a href="{% url 'product_list' %}" class="btn btn-secondary">
+                                <i class="fas fa-times me-2"></i>Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+    document.getElementById('quantity').addEventListener('input', function() {
+        const quantity = this.value;
+        const price = {{ product.price }};
+        const total = (quantity * price).toFixed(2);
+        document.getElementById('total_price').value = total;
+    });
+</script>
+{% endblock %}
+{% endblock %}

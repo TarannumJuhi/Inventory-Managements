@@ -1,0 +1,26 @@
+[
+    {
+        "model": "inventory.category",
+        "pk": 1,
+        "fields": {
+            "name": "Mobiles",
+            "description": "Smartphones and mobile devices"
+        }
+    },
+    {
+        "model": "inventory.category",
+        "pk": 2,
+        "fields": {
+            "name": "Laptops",
+            "description": "Portable computers and accessories"
+        }
+    },
+    {
+        "model": "inventory.category",
+        "pk": 3,
+        "fields": {
+            "name": "Smart Watches",
+            "description": "Wearable smart devices"
+        }
+    }
+]
