@@ -61,10 +61,3 @@ A Django-based inventory management system for an electronics shop selling mobil
 3. Manage inventory, track sales, and monitor stock levels
 4. Export inventory data as needed
 
-## id password
-Admin-- juhi
-pswd--123456
-
-
-user-- TJ
-Password-- juhi@1234
